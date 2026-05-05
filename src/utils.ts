@@ -212,7 +212,7 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
   return new Promise((resolve, reject) => {
     const DIST_PATH = path.join(options.dist, options.fontName + ".woff2");
     const woff2 = Buffer.from(ttf2woff2(ttf).buffer);
-    fs.writeFile(DIST_PATH, woff2, (err) => {
+    fs.writeFile(DIST_PATH, woff2, (err: NodeJS.ErrnoException | null) => {
       if (err) {
         return reject(err);
       }
@@ -318,7 +318,7 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
       }));
       if (_opts.output) {
         const output = path.join(process.cwd(), _opts.output);
-        await Promise.all(createdFiles.map(async (file) => {
+        await Promise.all(createdFiles.map(async (file): Promise<null> => {
           await moveFile(file, path.join(output, path.basename(file)));
           return null;
         }));
