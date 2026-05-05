@@ -57,6 +57,10 @@
     "node": ">=16.0.0"
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/test/setup.js"
+    ],
+    "testTimeout": 60000,
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/?!(.*)"
     ],
